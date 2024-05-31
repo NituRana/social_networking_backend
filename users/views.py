@@ -104,3 +104,11 @@ class FriendListView(generics.ListAPIView):
         friends = FriendRequest.objects.filter(to_user=user, accepted=True).values_list('from_user', flat=True)
         return User.objects.filter(id__in=friends)
 
+class PendingFriendRequestsView(generics.ListAPIView):
+    serializer_class = FriendRequestSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return FriendRequest.objects.filter(to_user=user, accepted=False, rejected=False)
