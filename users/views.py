@@ -26,7 +26,6 @@ class SignupView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
 
-
 class LoginView(ObtainAuthToken):
     serializer_class = CustomAuthTokenSerializer
     def post(self, request, *args, **kwargs):
@@ -36,16 +35,32 @@ class LoginView(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
 
-User = get_user_model()
+# for search
+class UserSearchView(generics.ListAPIView):
+
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        query = self.request.query_params.get('q', '')
+        return User.objects.filter(
+            Q(email__iexact=query) | Q(full_name__icontains=query)
+        )
+
 class FriendRequestViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     queryset = FriendRequest.objects.all()
     serializer_class = FriendRequestSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return self.queryset.filter(to_user=self.request.user, accepted=False, rejected=False)
 
     @method_decorator(ratelimit(key='user', rate='3/m', method='POST', block=True))
+    
     @action(detail=False, methods=['post'])
     def send(self, request):
         from_user = request.user
@@ -79,7 +94,6 @@ class FriendRequestViewSet(viewsets.ModelViewSet):
         friend_request.save()
         return Response({'status': 'Request rejected'})
 
-
 class FriendListView(generics.ListAPIView):
     serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication]
@@ -87,18 +101,6 @@ class FriendListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        friends = FriendRequest.objects.filter(from_user=user, accepted=True).values_list('to_user', flat=True)
+        friends = FriendRequest.objects.filter(to_user=user, accepted=True).values_list('from_user', flat=True)
         return User.objects.filter(id__in=friends)
 
-# for search
-class UserSearchView(generics.ListAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-    serializer_class = UserSerializer
-
-
-    def get_queryset(self):
-        query = self.request.query_params.get('q', '')
-        return User.objects.filter(
-            Q(email__iexact=query) | Q(user_name__icontains=query)
-        )

@@ -4,7 +4,7 @@ from .views import SignupView, LoginView, FriendRequestViewSet, FriendListView, 
 
 
 router = DefaultRouter()
-router.register(r'friend_requests', FriendRequestViewSet, basename='friend_request')
+router.register(r'friend-request', FriendRequestViewSet, basename='friend_request')
 
 urlpatterns = [
     path('signup/', SignupView.as_view(), name='signup'),
