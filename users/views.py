@@ -1,12 +1,10 @@
-from django.shortcuts import render
-
-from django.contrib.auth import get_user_model
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.pagination import PageNumberPagination
 
 from rest_framework import generics
 from django.db.models import Q
@@ -36,12 +34,17 @@ class LoginView(ObtainAuthToken):
         return Response({'token': token.key})
 
 # for search
+class UserSearchPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = "page_size"
+    max_page_size = 30
 class UserSearchView(generics.ListAPIView):
 
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     serializer_class = UserSerializer
+    pagination_class = UserSearchPagination
 
     def get_queryset(self):
         query = self.request.query_params.get('q', '')
