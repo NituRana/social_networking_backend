@@ -10,18 +10,21 @@
 		{
 			"name": "1. users/signup/",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"cart_data\":{\n        \"item1\": {\n        \"item_type\": \"quota\",\n        \"item_id\": 2028,\n        \"quantity\": 2\n        },\n        \"item2\": {\n        \"item_type\": \"quota\",\n        \"item_id\": 2029,\n        \"quantity\": 5\n        }\n    }\n}",
+					"raw": "{\n    \"full_name\": \"Nieli6 Potter\",\n    \"first_name\": \"Nieeli\",\n    \"last_name\": \"Potter\",\n    \"phone_number\": \"9283813605\",\n    \"email\": \"N1eli6@example.com\",\n    \"password\": \"Nieli\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://127.0.0.1:8000/api/v1/users/session-cart/"
+				"url": "http://127.0.0.1:8000/api/v1/users/signup/"
 			},
 			"response": []
 		},
@@ -37,7 +40,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"Neeli1@example.com\",\n    \"password\": \"Neeli\"\n}"
+					"raw": "{\n    \"email\": \"nick5@example.com\",\n    \"password\": \"nick\"\n}"
 				},
 				"url": "http://127.0.0.1:8000/api/v1/users/login/"
 			},
@@ -49,7 +52,7 @@
 				"auth": {
 					"type": "bearer",
 					"bearer": {
-						"token": "faa57781a154907ad40466abf59bf81f8aeb2a0b"
+						"token": "7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
 					}
 				},
 				"method": "POST",
@@ -59,12 +62,8 @@
 						"value": "application/json"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"email\": \"john49@example.com\",\n    \"password\": \"john\"\n}"
-				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/users/login/search/?q=<query>.",
+					"raw": "http://127.0.0.1:8000/api/v1/users/search/?q=nit",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -77,14 +76,13 @@
 						"api",
 						"v1",
 						"users",
-						"login",
 						"search",
 						""
 					],
 					"query": [
 						{
 							"key": "q",
-							"value": "<query>."
+							"value": "nit"
 						}
 					]
 				}
@@ -146,12 +144,12 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Token 7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
+						"value": "Token 7508f43d6a5e8e63c649557840235311365c81ef"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"to_user\": \"21\"\n}",
+					"raw": "{\n    \"to_user\": \"19\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
