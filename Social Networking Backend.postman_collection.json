@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "258c056e-7c86-4212-8d54-d99d86685002",
+		"name": "Social Networking Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27007779",
+		"_collection_link": "https://cloudy-desert-725237.postman.co/workspace/Team-Workspace~c8575a84-dc74-49df-826e-09675418198b/collection/27007779-258c056e-7c86-4212-8d54-d99d86685002?action=share&source=collection_link&creator=27007779"
+	},
+	"item": [
+		{
+			"name": "1. users/signup/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_data\":{\n        \"item1\": {\n        \"item_type\": \"quota\",\n        \"item_id\": 2028,\n        \"quantity\": 2\n        },\n        \"item2\": {\n        \"item_type\": \"quota\",\n        \"item_id\": 2029,\n        \"quantity\": 5\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/v1/users/session-cart/"
+			},
+			"response": []
+		},
+		{
+			"name": "2. users/login/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"Neeli1@example.com\",\n    \"password\": \"Neeli\"\n}"
+				},
+				"url": "http://127.0.0.1:8000/api/v1/users/login/"
+			},
+			"response": []
+		},
+		{
+			"name": "3. users/login/search/?q=<query>.",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "faa57781a154907ad40466abf59bf81f8aeb2a0b"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"john49@example.com\",\n    \"password\": \"john\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/users/login/search/?q=<query>.",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"login",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "<query>."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. users/search/?q=john",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/users/search/?q=ni",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "ni"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. users/friend-request/send/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_user\": \"21\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/v1/users/friend-request/send/"
+			},
+			"response": []
+		},
+		{
+			"name": "6. users/friend-request/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_user\": \"19\"\n}"
+				},
+				"url": "http://127.0.0.1:8000/api/v1/users/friend-request/"
+			},
+			"response": []
+		},
+		{
+			"name": "8. users/friend-request/11/reject/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://127.0.0.1:8000/api/v1/users/friend-request/11/reject/"
+			},
+			"response": []
+		},
+		{
+			"name": "7. users/friend-request/11/accept/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
+					}
+				],
+				"url": "http://127.0.0.1:8000/api/v1/users/friend-request/11/accept/"
+			},
+			"response": []
+		},
+		{
+			"name": "9. users/pending-friend-request/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 7bcad59d2caffcc48c1fb7d5d0675e1014a206d8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to_user\": \"19\"\n}"
+				},
+				"url": "http://127.0.0.1:8000/api/v1/users/pending-friend-request/"
+			},
+			"response": []
+		}
+	]
+}
