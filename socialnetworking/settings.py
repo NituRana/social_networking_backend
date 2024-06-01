@@ -10,10 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
-
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+env = environ.Env(DEBUG=(bool, False))
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -90,13 +94,13 @@ TOKEN_EXPIRE_DAYS = 15
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'socialnetworking_backend_v1',
-        'USER': 'postgres_dev_nitu',
-        'PASSWORD': 'accuknox1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
+   "default": {
+        "ENGINE": env("DATABASE_ENGINE"),
+        "NAME": env("DATABASE_NAME"),
+        "HOST": env("DATABASE_HOST"),
+        "PORT": env("DATABASE_PORT"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
     }
 }
 
